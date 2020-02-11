@@ -72,6 +72,12 @@ function downloadMarkdown(markdown, article) {
   }
 }
 
+function copyToClipboard(markdown) {
+
+  console.log(markdown);
+  navigator.clipboard.writeText(markdown);
+  
+}
 
 //function that handles messages from the injected script into the site
 function notify(message) {
@@ -79,9 +85,14 @@ function notify(message) {
   var dom = parser.parseFromString(message.dom, "text/html");
   if (dom.documentElement.nodeName == "parsererror"){
     console.error( "error while parsing");
-  } 
+  }
 
   var article = createReadableVersion(dom);
   var markdown = convertArticleToMarkdown(article);
-  downloadMarkdown(markdown, article);
+
+  copyToClipboard(markdown);
+  var creating = browser.tabs.create({
+    url:"https://gitlab.com/mcgin/reading/-/new/master/content/page"
+  });
+  
 }

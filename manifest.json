@@ -17,7 +17,8 @@
     "permissions": [
         "activeTab",
         "tabs",
-        "downloads"
+        "downloads",
+        "clipboardWrite"
       ],
     
       "browser_action": {
